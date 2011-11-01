@@ -6,7 +6,7 @@ gem 'pg'
 gem 'therubyracer'
 gem 'thinking-sphinx'
 gem 'kaminari'
-gem 'nested_form'#, :git => "http://github.com/ryanb/nested_form.git"
+gem 'nested_form', :git => "http://github.com/ryanb/nested_form.git"
 
 gem 'flutie'
 gem 'bourbon'
