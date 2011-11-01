@@ -1,0 +1,27 @@
+<div class="field-transfer">
+  <div class="field">
+    <%= f.label :transferred, 'Transferred to' %><br />
+    <%= f.collection_select(:court_id, Court.all, :id, :to_s, {:include_blank => true}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transferred_on_month, 'Month' %><br />
+    <%= f.select(:transferred_on_month, options_for_select(ApplicationHelper::MONTH_OPTIONS_FOR_SELECT, f.object.transferred_on_month), {include_blank: true}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transferred_on_date, 'Day' %><br />
+    <%= f.text_field :transferred_on_date, class: 'field-date-day' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transferred_on_year, 'Year' %><br />
+    <%= f.text_field :transferred_on_year, class: 'field-date-year' %>
+  </div>
+
+  <div class="action">
+    <br>
+    <%= f.link_to_remove "Remove" %>
+  </div>
+</div>
+

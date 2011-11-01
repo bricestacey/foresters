@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @court.name %>
+</p>
+
+<p>
+  <b>Street:</b>
+  <%= @court.street %>
+</p>
+
+<p>
+  <b>Town:</b>
+  <%= @court.town %>
+</p>
+
+<p>
+  <b>Instituted at:</b>
+  <%= @court.instituted_on %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @court.gender %>
+</p>
+
+<p>
+  <b>Closed:</b>
+  <%= @court.closed_on %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @court.notes %>
+</p>
+
+<p>
+  <b>Ethnicities:</b>
+  <%= @court.ethnicities.map{|e| e.name}.join(', ') %>
+</p>
+
+<%= link_to 'Edit', edit_court_path(@court) %> |
+<%= link_to 'Back', courts_path %>

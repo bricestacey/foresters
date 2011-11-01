@@ -1,0 +1,82 @@
+<%= nested_form_for(@record) do |f| %>
+  <% if @record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+      <ul>
+      <% @record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= field_set_tag 'Names' do %>
+    <%= f.fields_for :names %>
+    <%= f.link_to_add "Add a Name", :names %>
+  <% end %>
+
+  <%= f.fields_for :residence %>
+
+  <%= field_set_tag 'Courts' do %>
+    <div class="field">
+      <%= f.label :court %>
+      <%= f.collection_select(:court_id, Court.all, :id, :to_s, {:include_blank => true}) %>
+    </div>
+
+    <%= f.fields_for :transfers %>
+    <%= f.link_to_add "Add a Transfer", :transfers %>
+  <% end %>
+
+  <%= field_set_tag 'Initiation' do %>
+    <div class="field">
+      <%= f.label :register_no, 'Register Number' %>
+      <%= f.number_field :register_no %>
+    </div>
+
+    <div class="field">
+      <%= f.label :age_at_initiation %><br />
+      <%= f.number_field :age_at_initiation %>
+    </div>
+
+    <%= date_to_text_selectors('initiated_on', f, @record) %>
+  <% end %>
+
+  <%= field_set_tag 'Beneficiaries' do %>
+    <%= f.fields_for :beneficiaries %>
+    <%= f.link_to_add "Add a Beneficiary", :beneficiaries %>
+  <% end %>
+
+  <%= field_set_tag 'Suspended On' do %>
+    <%= date_to_text_selectors('suspended_on', f, @record) %>
+  <% end %>
+  <%= field_set_tag 'Reinstated On' do %>
+    <%= date_to_text_selectors('reinstated_on', f, @record) %>
+  <% end %>
+  <%= field_set_tag 'Withdrawn On' do %>
+    <%= date_to_text_selectors('withdrawn_on', f, @record) %>
+  <% end %>
+  <%= field_set_tag 'Died On' do %>
+    <%= date_to_text_selectors('died_on', f, @record) %>
+  <% end %>
+
+  <%= field_set_tag 'Paid On' do %>
+    <%= date_to_text_selectors('paid_on', f, @record) %>
+  <% end %>
+
+  <%= field_set_tag 'Death Claim Number' do %>
+    <div class="field">
+      <%= f.number_field :claim_id %>
+    </div>
+  <% end %>
+
+  <%= field_set_tag 'Notes' do %>
+    <div class="field">
+      <%= f.text_area :notes %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

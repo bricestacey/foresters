@@ -1,0 +1,114 @@
+<p id="notice"><%= notice %></p>
+
+<div id="names">
+  <% @record.names.each do |name| %>
+    <p>
+      <b>Name last:</b>
+      <%= name.last %>
+    </p>
+
+    <p>
+      <b>Name first:</b>
+      <%= name.first %>
+    </p>
+
+    <p>
+      <b>Name middle:</b>
+      <%= name.middle %>
+    </p>
+
+    <p>
+      <b>Title:</b>
+      <%= name.title %>
+    </p>
+    <hr>
+  <% end %>
+</div>
+
+<p>
+  <div><b>Residence:</b></div>
+  <div><%= @record.residence.line1 %></div>
+  <div><%= @record.residence.city %></div>
+  <div><%= @record.residence.state %></div>
+  <div><%= @record.residence.zip %></div>
+</p>
+<hr>
+
+<p>
+  <b>Court:</b>
+  <%= @record.court %>
+
+  <% @record.transfers.each do |transfer| %>
+    <div><%= transfer.court.name %></div>
+    <div><%= transfer.transferred_on_year %></div>
+    <div><%= transfer.transferred_on_month %></div>
+    <div><%= transfer.transferred_on_date %></div>
+  <% end %>
+</p>
+<hr>
+
+<p>
+  <b>Register Number:</b>
+  <%= @record.register_no %>
+</p>
+<p>
+  <b>Age at initiation:</b>
+  <%= @record.age_at_initiation %>
+</p>
+<p>
+  <b>Initiated at:</b>
+  <%= @record.initiated_on %>
+</p>
+<hr>
+
+<% @record.beneficiaries.each do |beneficiary| %>
+  <p>
+    <b>Beneficiary:</b>
+    <div><%= beneficiary.name %></div>
+    <div><%= beneficiary.relationship %></div>
+  </p>
+<% end %>
+<hr>
+
+
+<p>
+  <b>Suspended at:</b>
+  <%= @record.suspended_on %>
+</p>
+
+<p>
+  <b>Reinstated at:</b>
+  <%= @record.reinstated_on %>
+</p>
+
+<p>
+  <b>Withdrawn at:</b>
+  <%= @record.withdrawn_on %>
+</p>
+<p>
+  <b>Died at:</b>
+  <%= @record.died_on %>
+</p>
+
+<p>
+  <b>Paid at:</b>
+  <%= @record.paid_on %>
+</p>
+<hr>
+
+<p>
+  <b>Death Claim Number:</b>
+  <%= @record.claim_id %>
+</p>
+
+<hr>
+
+
+<p>
+  <b>Notes:</b>
+  <%= @record.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>

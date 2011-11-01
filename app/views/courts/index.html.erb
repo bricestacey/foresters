@@ -1,0 +1,52 @@
+<div id="courts"></div>
+
+<h1>Courts</h1>
+
+<div id="top">
+  <%= form_tag courts_path, :method => 'get' do %>
+      <%= label_tag :search %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+
+<div id="sidebar">
+  <% @facets.each do |facet, facet_options| %>
+    <div class="facet-name"><%= facet.to_s.humanize %></div>
+    <ul class="facet-list">
+    <% facet_options.sort_by{|a| a[0].to_s}.each do |option, count| %>
+      <% next if option.nil? %>
+      <li><%= link_to "#{option} (#{count})",
+        params.merge({facet => option, :page => 1}) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="main">
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Town</th>
+      <th>Street</th>
+      <th>Instituted at</th>
+    </tr>
+
+  <% @courts.each do |court| %>
+    <tr>
+      <td><%= link_to court.id, court %></td>
+      <td><%= court.name %></td>
+      <td><%= court.town %></td>
+      <td><%= court.street %></td>
+      <td><%= court.instituted_on %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= paginate @courts %>
+
+  <br />
+
+  <%= link_to 'New Court', new_court_path %>
+</div>

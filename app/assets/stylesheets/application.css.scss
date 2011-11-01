@@ -1,0 +1,117 @@
+@mixin clearfix {
+  display: inline-block;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html & { height: 1px }
+}
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+@import "flutie";
+@import "bourbon";
+@import "records";
+
+$gw-column: 176;
+$gw-gutter: 20px;
+
+#sidebar {
+  float: left;
+  width: grid-width(1);
+}
+#main {
+  float: left;
+  width: grid-width(4);
+  margin-left: $gw-gutter;
+}
+
+body {
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  background-color: #6A7176;
+  padding: 0.5em 0 0.5em 0;
+
+  h1 {
+    float: left;
+    display: inline;
+    margin: 0;
+    padding: 0 10px 0 0;
+    font-size: 1.5em;
+    a, a:link, a:visited {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+  nav { 
+    float: left; 
+    color: #CDCDCD;
+    padding-top: 0.35em;
+  }
+  @include clearfix;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  height: 100%;
+
+  li {
+    display: inline;
+    margin-right: 4px;
+    padding: 9px 0;
+    font-size: 1.0em;
+    position: relative;
+
+    a:link {
+      text-decoration: none;
+      padding: 6px 10px 4px 10px;
+      position: relative;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    a:link, a:visited { color: #CDCDCD;}
+  }
+
+  li.active > a {
+    background-color: #7BB389;
+    color: #fff;
+  }
+}
+
+input.field-date-day {
+  width: 2em;
+}
+
+input.field-date-year {
+  width: 4em;
+}
+
+.facet-name {
+  font-weight: bold;
+}
+.facet-list {
+  list-style: none;
+  margin-top: 0;
+  padding-left: 0em;
+}
+#top {
+  margin: 1em 0 1em 0;
+}

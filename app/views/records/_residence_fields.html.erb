@@ -1,0 +1,20 @@
+<%= field_set_tag 'Residence' do %>
+  <div class="field-residence">
+    <div class="field">
+      <%= f.label :line1, 'Street' %>
+      <%= f.text_field :line1 %>
+    </div>
+    <div class="field">
+      <%= f.label :city, 'City' %>
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <%= f.label :state, 'State' %>
+      <%= f.text_field :state %>
+    </div>
+    <div class="field">
+      <%= f.label :zip, 'Zipcode' %>
+      <%= f.text_field :zip %>
+    </div>
+  </div>
+<% end %>

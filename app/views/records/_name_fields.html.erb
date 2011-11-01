@@ -1,0 +1,27 @@
+<%# `f` is a form builder %>
+<div class="field-name">
+  <div class="field field-name-last">
+    <%= f.label :last %>
+    <%= f.text_field :last %>
+  </div>
+
+  <div class="field field-name-first">
+    <%= f.label :first %>
+    <%= f.text_field :first %>
+  </div>
+
+  <div class="field field-name-middle">
+    <%= f.label :middle %>
+    <%= f.text_field :middle %>
+  </div>
+
+  <div class="field field-name-title">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="action">
+    <br>
+    <%= f.link_to_remove "Remove" %>
+  </div>
+</div>

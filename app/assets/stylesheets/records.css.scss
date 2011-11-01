@@ -1,0 +1,31 @@
+@mixin clearfix {
+  display: inline-block;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html & { height: 1px }
+}
+
+.field-name,
+.field-transfer,
+.field-beneficiary,
+.inline-fields {
+  @include clearfix;
+
+  .field, 
+  .action {
+    float: left;
+    padding-right: 1em;
+  }
+}
+
+.field-name {
+  .field-name-last   input { width: 10em; }
+  .field-name-middle input { width: 6em; }
+  .field-name-first  input { width: 10em; }
+  .field-name-title  input { width: 4em; }
+}

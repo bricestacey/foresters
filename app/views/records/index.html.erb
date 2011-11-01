@@ -1,0 +1,54 @@
+<h1>Records</h1>
+
+<div id="top">
+  <%= form_tag records_path, :method => 'get' do %>
+      <%= label_tag :search %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+
+<div id="sidebar">
+  <% @facets.each do |facet, facet_options| %>
+    <div class="facet-name"><%= facet.to_s.humanize %></div>
+    <ul class="facet-list">
+    <% facet_options.sort_by{|a| a[0].to_s}.each do |option, count| %>
+      <% next if option.nil? %>
+      <li><%= link_to "#{option} (#{count})",
+        params.merge({facet => option, :page => 1}) %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="main">
+  <table>
+    <tr>
+      <th>Claim</th>
+      <th>Last</th>
+      <th>First</th>
+      <th>Middle</th>
+      <th>Court</th>
+      <th>Age at initiation</th>
+      <th>Initiated on</th>
+    </tr>
+
+  <% @records.each do |record| %>
+    <tr>
+      <td><%= link_to record.claim_id, record %></td>
+      <td><%= record.name_last %></td>
+      <td><%= record.name_first %></td>
+      <td><%= record.name_middle %></td>
+      <td><%= record.court_name %></td>
+      <td><%= record.age_at_initiation %></td>
+      <td><%= record.initiated_on %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= paginate @records %>
+
+  <br />
+
+  <%= link_to 'New Record', new_record_path %>
+</div>

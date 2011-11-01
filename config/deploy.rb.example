@@ -1,0 +1,54 @@
+require "bundler/capistrano"
+
+default_run_options[:pty] = true 
+
+set :application, "Foresters Collection"
+
+set :scm, :git
+set :repository,  "git@github.com:bricestacey/foresters.git"
+set :user, "deployer"
+
+set :deploy_via, :remote_cache
+set :deploy_to, "/var/www/foresters"
+
+role :web, "example.com"                           # Your HTTP server, Apache/etc
+role :app, "example.com"                           # This may be the same as your `Web` server
+role :db,  "example.com", :primary => true         # This is where Rails migrations will run
+
+# If you are using Passenger mod_rails uncomment this:
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  namespace :foresters do
+
+    desc <<-DESC
+      Creates database.yml in shared path.
+
+      Fails if either of the files do not yet exist.
+
+      When this recipe is loaded, foresters:setup is automatically configured \
+      to be invoked after deploy:setup. You can skip this task setting \
+      the variable :skip_db_setup to true.
+    DESC
+    task :setup, except: { no_release: true } do
+      raise unless File.exists?('config/database.yml')
+
+      db_file = File.open('config/database.yml').read
+
+      run "mkdir -p #{shared_path}/config"
+      put db_file, "#{shared_path}/config/database.yml"
+    end
+
+    desc <<-DESC
+      [internal] Updates the symlink for database.yml file to the just deployed \
+      release
+    DESC
+    task :symlink, except: { no_release: true } do
+      run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    end
+  end
+end

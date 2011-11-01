@@ -1,0 +1,62 @@
+<%= form_for(@court) do |f| %>
+  <% if @court.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@court.errors.count, "error") %> prohibited this court from being saved:</h2>
+
+      <ul>
+      <% @court.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= field_set_tag 'Information' do %> 
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :street %><br />
+      <%= f.text_field :street %>
+    </div>
+    <div class="field">
+      <%= f.label :town %><br />
+      <%= f.text_field :town %>
+    </div>
+  <% end %>
+
+  <%= field_set_tag 'Dates' do %>
+    <div class="field">
+      <%= f.label :instituted_on %><br />
+      <%= f.date_select :instituted_on, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :closed_on %><br />
+      <%= f.date_select :closed_on, include_blank: true %>
+    </div>
+  <% end %>
+ 
+  <%= field_set_tag 'Demographics' do %>
+    <div class="field">
+      <%= f.label :gender %><br />
+      <%= f.text_field :gender %>
+    </div>
+
+   <div class="field">
+      <%= f.label :ethnicities %><br />
+      <%= f.collection_select :ethnicity_ids, Ethnicity.all, :id, :name, {selected: @court.ethnicity_ids}, {multiple: true} %>
+    </div>
+  <% end %>
+
+  <%= field_set_tag 'Notes' do %>
+    <div class="field">
+      <%= f.text_area :notes %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
