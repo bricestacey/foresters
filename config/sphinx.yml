@@ -2,3 +2,7 @@ development:
   morphology: stem_en
   enable_star: true
   min_infix_len: 3
+
+production:
+  pid_file: /var/www/foresters/shared/tmp/searchd.pid
+  searchd_file_path: /var/www/foresters/shared/db/sphinx
