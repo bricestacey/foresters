@@ -11,10 +11,6 @@ describe Court do
     it { should have_valid(:notes).when(nil, '', 'foo') }
     it { should have_valid(:created_at).when(Date.today) }
     it { should have_valid(:updated_at).when(Date.today) }
-
-    context 'required for thinking sphinx' do
-      it { should have_valid(:delta).when(false, true) }
-    end
   end
 
   describe "associations" do
