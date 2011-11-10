@@ -10,7 +10,7 @@ class Court < ActiveRecord::Base
   delegate :year, :month, :day, to: :closed_on,     prefix: true, allow_nil: true
 
   def to_s
-    "#{id} - #{name}"
+    "#{code} - #{name}"
   end
 
   define_index do

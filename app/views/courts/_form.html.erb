@@ -13,6 +13,10 @@
 
   <%= field_set_tag 'Information' do %> 
     <div class="field">
+      <%= f.label :code, 'Court Number' %><br />
+      <%= f.text_field :code %>
+    </div>
+    <div class="field">
       <%= f.label :name %><br />
       <%= f.text_field :name %>
     </div>

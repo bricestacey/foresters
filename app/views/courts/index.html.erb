@@ -26,7 +26,7 @@
 <div id="main">
   <table>
     <tr>
-      <th>ID</th>
+      <th>Number</th>
       <th>Name</th>
       <th>Town</th>
       <th>Street</th>
@@ -35,7 +35,7 @@
 
   <% @courts.each do |court| %>
     <tr>
-      <td><%= link_to court.id, court %></td>
+      <td><%= link_to court.code, court %></td>
       <td><%= court.name %></td>
       <td><%= court.town %></td>
       <td><%= court.street %></td>
