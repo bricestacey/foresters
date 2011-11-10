@@ -111,4 +111,5 @@
 
 
 <%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Delete', record_path(@record), method: :delete, confirm: 'Are you sure you wish to delete this record? This operation cannot be undone.' %> |
 <%= link_to 'Back', records_path %>
