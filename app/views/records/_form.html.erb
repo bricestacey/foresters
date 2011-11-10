@@ -72,7 +72,13 @@
 
   <%= field_set_tag 'Notes' do %>
     <div class="field">
+      <%= f.label :notes, 'Public Notes' %><br />
       <%= f.text_area :notes %>
+    </div>
+
+    <div class="field">
+      <%= f.label :notes_private, 'Private Notes' %><br />
+      <%= f.text_area :notes_private %>
     </div>
   <% end %>
 
