@@ -6,6 +6,9 @@ class Court < ActiveRecord::Base
 
   before_destroy :ensure_no_records 
 
+  delegate :year, :month, :day, to: :instituted_on, prefix: true, allow_nil: true
+  delegate :year, :month, :day, to: :closed_on,     prefix: true, allow_nil: true
+
   def to_s
     "#{id} - #{name}"
   end

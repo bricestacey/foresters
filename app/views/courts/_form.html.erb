@@ -29,12 +29,16 @@
   <%= field_set_tag 'Dates' do %>
     <div class="field">
       <%= f.label :instituted_on %><br />
-      <%= f.date_select :instituted_on, include_blank: true %>
+      <%= text_field_tag 'court[instituted_on(1i)]', @court.instituted_on_year, maxlength: 4, size: 4 %>
+      <%= select_month @court.instituted_on, prefix: 'court', field_name: 'instituted_on(2i)', include_blank: true %>
+      <%= select_day   @court.instituted_on, prefix: 'court', field_name: 'instituted_on(3i)', include_blank: true %>
     </div>
 
     <div class="field">
       <%= f.label :closed_on %><br />
-      <%= f.date_select :closed_on, include_blank: true %>
+      <%= text_field_tag 'court[closed_on(1i)]', @court.closed_on_year, maxlength: 4, size: 4 %>
+      <%= select_month @court.closed_on, prefix: 'court', field_name: 'closed_on(2i)', include_blank: true %>
+      <%= select_day   @court.closed_on, prefix: 'court', field_name: 'closed_on(3i)', include_blank: true %>
     </div>
   <% end %>
  
