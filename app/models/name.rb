@@ -1,3 +1,3 @@
 class Name < ActiveRecord::Base
-  belongs_to :record
+  belongs_to :record, touch: true
 end

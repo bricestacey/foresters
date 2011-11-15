@@ -1,4 +1,5 @@
 <%= nested_form_for(@record) do |f| %>
+  <%= hidden_field_tag :updated_at, @record.updated_at %>
   <% if @record.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@record.errors.count, "error") %> prohibited this record from being saved:</h2>
