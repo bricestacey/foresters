@@ -1,17 +1,22 @@
 class RecordsController < ApplicationController
   def index
-    if params[:search] || params[:court_name]
-      facets_fields = {court_name: params[:court_name]}.reject {|k,v| v.nil?}
-      @records = Record.search params[:search],
-        page: params[:page],
-        conditions: facets_fields,
-        star: true,
-        per_page: 100
-      @facets = @records.facets
-    else
-      @records = Record.includes(:court).page params[:page]
-      @facets = Record.facets
-    end
+    options = {
+      page: params[:page],
+      conditions: {}.tap do |condition|
+        # Facets
+        condition[:court_name]  = params[:court_name]  if params[:court_name]
+
+        # Search query depending on index
+        condition[:name_first]  = params[:search] if params[:index] == 'name_first'
+        condition[:name_middle] = params[:search] if params[:index] == 'name_middle'
+        condition[:name_last]   = params[:search] if params[:index] == 'name_last'
+      end,
+      star: true,
+      per_page: 100
+    }
+
+    @records = Record.search (params[:index] == 'keyword') ? params[:search] : '', options
+    @facets = @records.facets
   end
 
   def show

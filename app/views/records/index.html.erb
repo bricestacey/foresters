@@ -2,9 +2,10 @@
 
 <div id="top">
   <%= form_tag records_path, :method => 'get' do %>
-      <%= label_tag :search %>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
+    <%= label_tag :search %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= select_tag "index", options_for_select(Record::SEARCH_INDEXES, selected: params[:index]) %>
+    <%= submit_tag "Search", :name => nil %>
   <% end %>
 </div>
 

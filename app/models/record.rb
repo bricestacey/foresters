@@ -43,6 +43,13 @@ class Record < ActiveRecord::Base
     "#{withdrawn_on_year}/#{withdrawn_on_month}/#{withdrawn_on_date}"
   end
 
+  SEARCH_INDEXES = [
+    ['Keywords', 'keyword'], 
+    ['First Name', 'name_first'],
+    ['Middle Name', 'name_middle'],
+    ['Last Name', 'name_last']
+  ]
+
   define_index do
     indexes names.first,  as: :name_first
     indexes names.middle, as: :name_middle
