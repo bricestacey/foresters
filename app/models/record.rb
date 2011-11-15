@@ -18,6 +18,7 @@ class Record < ActiveRecord::Base
       :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
 
   delegate :name, to: :court, prefix: true, allow_nil: true
+  delegate :city, to: :residence, prefix: true, allow_nil: true
 
   delegate :last, to: 'names.last', prefix: :name, allow_nil: true
   delegate :first, to: 'names.last', prefix: :name, allow_nil: true
@@ -56,9 +57,7 @@ class Record < ActiveRecord::Base
     indexes names.last,   as: :name_last,   sortable: true
     indexes names.title,  as: :name_title,  sortable: true
     indexes court.name,   as: :court_name,  sortable: true, facet: true
-    indexes initiated_on_year,  as: :initiated_on_year,  sortable: true
-    indexes initiated_on_month, as: :initiated_on_month, sortable: true
-    indexes initiated_on_date,  as: :initiated_on_date,  sortable: true
+    indexes residence.city, as: :residence_city, sortable: true
 
     has claim_id, as: :claim_id, sortable: true
     has court_id

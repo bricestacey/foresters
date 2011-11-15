@@ -29,7 +29,9 @@
       <th><%= link_to_sortable 'Last',   'name_last',   params %></th>
       <th><%= link_to_sortable 'First',  'name_first',  params %></th>
       <th><%= link_to_sortable 'Middle', 'name_middle', params %></th>
+      <th><%= link_to_sortable 'Title',  'name_title',  params %></th>
       <th><%= link_to_sortable 'Court',  'court_name',  params %></th>
+      <th><%= link_to_sortable 'Residence', 'residence_city',  params %></th>
     </tr>
 
   <% @records.each do |record| %>
@@ -38,7 +40,9 @@
       <td><%= record.name_last %></td>
       <td><%= record.name_first %></td>
       <td><%= record.name_middle %></td>
+      <td><%= record.name_title %></td>
       <td><%= record.court_name %></td>
+      <td><%= record.residence_city %></td>
     </tr>
   <% end %>
   </table>
