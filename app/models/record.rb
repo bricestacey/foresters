@@ -21,27 +21,27 @@ class Record < ActiveRecord::Base
   delegate :city, to: :residence, prefix: true, allow_nil: true
 
   delegate :last, to: 'names.last', prefix: :name, allow_nil: true
-  delegate :first, to: 'names.last', prefix: :name, allow_nil: true
-  delegate :middle, to: 'names.last', prefix: :name, allow_nil: true
-  delegate :title, to: 'names.last', prefix: :name, allow_nil: true
+  delegate :first, to: 'names.first', prefix: :name, allow_nil: true
+  delegate :middle, to: 'names.middle', prefix: :name, allow_nil: true
+  delegate :title, to: 'names.title', prefix: :name, allow_nil: true
 
   def initiated_on
-    "#{initiated_on_year}/#{initiated_on_month}/#{initiated_on_date}"
+    [initiated_on_year, initiated_on_month, initiated_on_date].delete_if(&:blank?).join('/')
   end
   def died_on
-    "#{died_on_year}/#{died_on_month}/#{died_on_date}"
+    [died_on_year, died_on_month, died_on_date].delete_if(&:blank?).join('/')
   end
   def suspended_on
-    "#{suspended_on_year}/#{suspended_on_month}/#{suspended_on_date}"
+    [suspended_on_year, suspended_on_month, suspended_on_date].delete_if(&:blank?).join('/')
   end
   def paid_on
-    "#{paid_on_year}/#{paid_on_month}/#{paid_on_date}"
+    [paid_on_year, paid_on_month, paid_on_date].delete_if(&:blank?).join('/')
   end
   def reinstated_on
-    "#{reinstated_on_year}/#{reinstated_on_month}/#{reinstated_on_date}"
+    [reinstated_on_year, reinstated_on_month, reinstated_on_date].delete_if(&:blank?).join('/')
   end
   def withdrawn_on
-    "#{withdrawn_on_year}/#{withdrawn_on_month}/#{withdrawn_on_date}"
+    [withdrawn_on_year, withdrawn_on_month, withdrawn_on_date].delete_if(&:blank?).join('/')
   end
 
   SEARCH_INDEXES = [
