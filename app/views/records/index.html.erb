@@ -14,7 +14,7 @@
     <div class="facet-name"><%= facet.to_s.humanize %></div>
     <ul class="facet-list">
     <% facet_options.sort_by{|a| a[0].to_s}.each do |option, count| %>
-      <% next if option.nil? %>
+      <% next if option.blank? %>
       <li><%= link_to "#{option} (#{count})",
         params.merge({facet => option, :page => 1}) %></li>
     <% end %>

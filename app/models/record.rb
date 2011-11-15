@@ -52,12 +52,13 @@ class Record < ActiveRecord::Base
   ]
 
   define_index do
-    indexes names.first,  as: :name_first,  sortable: true
-    indexes names.middle, as: :name_middle, sortable: true
-    indexes names.last,   as: :name_last,   sortable: true
-    indexes names.title,  as: :name_title,  sortable: true
-    indexes court.name,   as: :court_name,  sortable: true, facet: true
-    indexes residence.city, as: :residence_city, sortable: true
+    indexes names.first,    as: :name_first,     sortable: true
+    indexes names.middle,   as: :name_middle,    sortable: true
+    indexes names.last,     as: :name_last,      sortable: true
+    indexes names.title,    as: :name_title,     sortable: true
+    indexes court.name,     as: :court_name,     sortable: true, facet: true
+    indexes residence.city, as: :residence_city, sortable: true, facet: true
+    indexes died_on_year,   as: :died_on_year,   facet: true
 
     has claim_id, as: :claim_id, sortable: true
     has court_id

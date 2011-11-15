@@ -15,7 +15,9 @@ class RecordsController < ApplicationController
 
       option[:conditions] = {}.tap do |condition|
         # Facets
-        condition[:court_name]  = params[:court_name].gsub('/', '\/')  if params[:court_name]
+        condition[:court_name]      = sanitize(params[:court_name]) if params[:court_name]
+        condition[:residence_city]  = sanitize(params[:residence_city]) if params[:residence_city]
+        condition[:died_on_year]    = sanitize(params[:died_on_year]) if params[:died_on_year]
 
         # Search query depending on index
         condition[:name_first]  = params[:search] if params[:index] == 'name_first'
@@ -80,5 +82,10 @@ class RecordsController < ApplicationController
       flash[:error] = 'There was a problem deleting the record.'
       redirect_to records_url
     end
+  end
+
+  protected
+  def sanitize(str)
+    str.gsub('/', '\/') 
   end
 end
