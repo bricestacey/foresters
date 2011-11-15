@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
 
       option[:conditions] = {}.tap do |condition|
         # Facets
-        condition[:court_name]  = params[:court_name]  if params[:court_name]
+        condition[:court_name]  = params[:court_name].gsub('/', '\/')  if params[:court_name]
 
         # Search query depending on index
         condition[:name_first]  = params[:search] if params[:index] == 'name_first'
