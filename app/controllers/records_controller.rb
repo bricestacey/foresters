@@ -1,8 +1,19 @@
 class RecordsController < ApplicationController
   def index
-    options = {
-      page: params[:page],
-      conditions: {}.tap do |condition|
+    options = {}.tap do |option|
+      option[:page]      = params[:page]
+      option[:star]      = true
+      option[:per_page]  = 100
+
+      if params[:order]
+        option[:order]     = params[:order]
+        option[:sort_mode] = params[:sort_mode].blank? ? :asc : params[:sort_mode].to_sym
+      else
+        # Default sort is by weight, descending
+        option[:order]     = '@weight DESC'
+      end
+
+      option[:conditions] = {}.tap do |condition|
         # Facets
         condition[:court_name]  = params[:court_name]  if params[:court_name]
 
@@ -10,10 +21,8 @@ class RecordsController < ApplicationController
         condition[:name_first]  = params[:search] if params[:index] == 'name_first'
         condition[:name_middle] = params[:search] if params[:index] == 'name_middle'
         condition[:name_last]   = params[:search] if params[:index] == 'name_last'
-      end,
-      star: true,
-      per_page: 100
-    }
+      end
+    end
 
     @records = Record.search (params[:index] == 'keyword') ? params[:search] : '', options
     @facets = @records.facets

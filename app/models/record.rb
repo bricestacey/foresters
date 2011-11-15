@@ -51,12 +51,16 @@ class Record < ActiveRecord::Base
   ]
 
   define_index do
-    indexes names.first,  as: :name_first
-    indexes names.middle, as: :name_middle
-    indexes names.last,   as: :name_last
-    indexes names.title,  as: :name_title
-    indexes court.name,   as: :court_name, facet: true
+    indexes names.first,  as: :name_first,  sortable: true
+    indexes names.middle, as: :name_middle, sortable: true
+    indexes names.last,   as: :name_last,   sortable: true
+    indexes names.title,  as: :name_title,  sortable: true
+    indexes court.name,   as: :court_name,  sortable: true, facet: true
+    indexes initiated_on_year,  as: :initiated_on_year,  sortable: true
+    indexes initiated_on_month, as: :initiated_on_month, sortable: true
+    indexes initiated_on_date,  as: :initiated_on_date,  sortable: true
 
+    has claim_id, as: :claim_id, sortable: true
     has court_id
     has names.id
     set_property :delta => true
