@@ -21,9 +21,9 @@ class Record < ActiveRecord::Base
   delegate :city, to: :residence, prefix: true, allow_nil: true
 
   delegate :last, to: 'names.last', prefix: :name, allow_nil: true
-  delegate :first, to: 'names.first', prefix: :name, allow_nil: true
-  delegate :middle, to: 'names.middle', prefix: :name, allow_nil: true
-  delegate :title, to: 'names.title', prefix: :name, allow_nil: true
+  delegate :first, to: 'names.last', prefix: :name, allow_nil: true
+  delegate :middle, to: 'names.last', prefix: :name, allow_nil: true
+  delegate :title, to: 'names.last', prefix: :name, allow_nil: true
 
   def initiated_on
     [initiated_on_year, initiated_on_month, initiated_on_date].delete_if(&:blank?).join('/')
