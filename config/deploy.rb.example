@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'thinking_sphinx/deploy/capistrano'
 
 default_run_options[:pty] = true 
 
@@ -8,7 +9,7 @@ set :scm, :git
 set :repository,  "git@github.com:bricestacey/foresters.git"
 set :user, "deployer"
 
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/foresters"
 
 role :web, "example.com"                           # Your HTTP server, Apache/etc
@@ -24,13 +25,29 @@ namespace :deploy do
   end
 
   namespace :foresters do
+    task :setup do
+      authentication_file = File.open('config/authentication.yml').read
+      sphinx_file = File.open('config/sphinx.yml').read
+
+      run "mkdir -p #{shared_path}/config"
+      put authentication_file, "#{shared_path}/config/authentication.yml"
+      put sphinx_file, "#{shared_path}/config/sphinx.yml"
+    end
+
+    task :symlink do
+      run "ln -nfs #{shared_path}/config/authentication.yml #{release_path}/config/authentication.yml"
+      run "ln -nfs #{shared_path}/config/sphinx.yml #{release_path}/config/sphinx.yml"
+    end
+  end
+
+  namespace :db do
 
     desc <<-DESC
       Creates database.yml in shared path.
 
       Fails if either of the files do not yet exist.
 
-      When this recipe is loaded, foresters:setup is automatically configured \
+      When this recipe is loaded, db:setup is automatically configured \
       to be invoked after deploy:setup. You can skip this task setting \
       the variable :skip_db_setup to true.
     DESC
@@ -52,3 +69,9 @@ namespace :deploy do
     end
   end
 end
+
+after "deploy:setup", "deploy:db:setup"
+after "deploy:setup", "deploy:foresters:setup"
+after "deploy:finalize_update", "deploy:db:symlink"
+after "deploy:finalize_update", "deploy:foresters:symlink"
+before "deploy:restart", "thinking_sphinx:rebuild"
