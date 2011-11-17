@@ -16,6 +16,7 @@
           <li><%= link_to 'Courts', courts_path %></li>
           <li><%= link_to 'Records', records_path %></li>
           <li><%= link_to 'Export', exports_path %></li>
+          <li><%= link_to 'Re-Index', reindex_path, method: :put, confirm: 'Are you sure you want to re-index the site?' %></li>
         </ul>
       </nav>
     </div>
