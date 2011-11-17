@@ -1,6 +1,5 @@
 class Record < ActiveRecord::Base
   belongs_to :court
-#  belongs_to :transferred, :class_name => 'Court'
 
   has_one :residence, :class_name => 'Address'
   accepts_nested_attributes_for :residence
@@ -44,6 +43,10 @@ class Record < ActiveRecord::Base
     [withdrawn_on_year, withdrawn_on_month, withdrawn_on_date].delete_if(&:blank?).join('/')
   end
 
+  # THINKING SPHINX
+
+  # These are the indexes you may search on. The first element of an array is 
+  # the label in the drop down. The second is the name of the sphinx index.
   SEARCH_INDEXES = [
     ['Keywords', 'keyword'], 
     ['First Name', 'name_first'],
@@ -60,7 +63,7 @@ class Record < ActiveRecord::Base
     indexes residence.city, as: :residence_city, sortable: true, facet: true
     indexes died_on_year,   as: :died_on_year,   sortable: true, facet: true
 
-    has claim_id, as: :claim_id, sortable: true
+    has claim_id,           as: :claim_id, sortable: true
     has court_id
     has names.id
     set_property :delta => true
