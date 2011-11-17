@@ -14,3 +14,4 @@ db/sphinx/**
 **/coverage/**
 config/database.yml
 config/deploy.rb
+config/authentication.yml
