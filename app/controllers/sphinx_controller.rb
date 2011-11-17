@@ -4,7 +4,7 @@ class SphinxController < ApplicationController
 
     if system("rake thinking_sphinx:index > #{log_file}")
       File.open(log_file, 'r') do |f|
-        @output = f.read.gsub(/\n/, '<br>').html_safe
+        @output = f.read
         flash[:success] = 'You have successfully reindexed the site.'
       end
     else
