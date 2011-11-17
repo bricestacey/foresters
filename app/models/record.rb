@@ -58,7 +58,7 @@ class Record < ActiveRecord::Base
     indexes names.title,    as: :name_title,     sortable: true
     indexes court.name,     as: :court_name,     sortable: true, facet: true
     indexes residence.city, as: :residence_city, sortable: true, facet: true
-    indexes died_on_year,   as: :died_on_year,   facet: true
+    indexes died_on_year,   as: :died_on_year,   sortable: true, facet: true
 
     has claim_id, as: :claim_id, sortable: true
     has court_id

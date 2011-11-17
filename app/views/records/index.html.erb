@@ -32,6 +32,7 @@
       <th><%= link_to_sortable 'Title',  'name_title',  params %></th>
       <th><%= link_to_sortable 'Court',  'court_name',  params %></th>
       <th><%= link_to_sortable 'Residence', 'residence_city',  params %></th>
+      <th><%= link_to_sortable 'Year of Death', 'died_on_year',  params %></th>
     </tr>
 
   <% @records.each do |record| %>
@@ -43,6 +44,7 @@
       <td><%= record.name_title %></td>
       <td><%= record.court_name %></td>
       <td><%= record.residence_city %></td>
+      <td><%= record.died_on_year %></td>
     </tr>
   <% end %>
   </table>
