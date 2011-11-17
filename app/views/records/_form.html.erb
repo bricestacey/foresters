@@ -12,6 +12,10 @@
     </div>
   <% end %>
 
+  <div class="actions">
+    <%= f.submit disable_with: 'Please wait...' %>
+  </div>
+
   <%= field_set_tag 'Names' do %>
     <%= f.fields_for :names %>
     <%= f.link_to_add "Add a Name", :names %>

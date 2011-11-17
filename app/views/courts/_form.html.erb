@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <div class="actions">
+    <%= f.submit disable_with: 'Please wait...' %>
+  </div>
+
   <%= field_set_tag 'Information' do %> 
     <div class="field">
       <%= f.label :code, 'Court Number' %><br />

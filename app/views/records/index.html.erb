@@ -23,35 +23,39 @@
 </div>
 
 <div id="main">
-  <table>
-    <tr>
-      <th><%= link_to_sortable 'Claim',  'claim_id', params %></th>
-      <th><%= link_to_sortable 'Last',   'name_last',   params %></th>
-      <th><%= link_to_sortable 'First',  'name_first',  params %></th>
-      <th><%= link_to_sortable 'Middle', 'name_middle', params %></th>
-      <th><%= link_to_sortable 'Title',  'name_title',  params %></th>
-      <th><%= link_to_sortable 'Court',  'court_name',  params %></th>
-      <th><%= link_to_sortable 'Residence', 'residence_city',  params %></th>
-      <th><%= link_to_sortable 'Year of Death', 'died_on_year',  params %></th>
-    </tr>
+  <p><%= link_to 'New Record', new_record_path %></p>
 
-  <% @records.each do |record| %>
-    <tr>
-      <td><%= link_to record.claim_id, record %></td>
-      <td><%= record.name_last %></td>
-      <td><%= record.name_first %></td>
-      <td><%= record.name_middle %></td>
-      <td><%= record.name_title %></td>
-      <td><%= record.court_name %></td>
-      <td><%= record.residence_city %></td>
-      <td><%= record.died_on_year %></td>
-    </tr>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= link_to_sortable 'Claim',  'claim_id', params %></th>
+        <th><%= link_to_sortable 'Last',   'name_last',   params %></th>
+        <th><%= link_to_sortable 'First',  'name_first',  params %></th>
+        <th><%= link_to_sortable 'Middle', 'name_middle', params %></th>
+        <th><%= link_to_sortable 'Title',  'name_title',  params %></th>
+        <th><%= link_to_sortable 'Court',  'court_name',  params %></th>
+        <th><%= link_to_sortable 'Residence', 'residence_city',  params %></th>
+        <th><%= link_to_sortable 'Year of Death', 'died_on_year',  params %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @records.each do |record| %>
+        <tr>
+          <td><%= link_to record.claim_id, record %></td>
+          <td><%= record.name_last %></td>
+          <td><%= record.name_first %></td>
+          <td><%= record.name_middle %></td>
+          <td><%= record.name_title %></td>
+          <td><%= record.court_name %></td>
+          <td><%= record.residence_city %></td>
+          <td><%= record.died_on_year %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 
   <%= paginate @records %>
 
-  <br />
-
-  <%= link_to 'New Record', new_record_path %>
+  <p><%= link_to 'New Record', new_record_path %></p>
 </div>

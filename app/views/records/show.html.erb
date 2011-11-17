@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= render 'links' %>
 
 <div id="names">
   <% @record.names.each do |name| %>
@@ -114,7 +114,4 @@
   <%= @record.notes_private %>
 </p>
 
-
-<%= link_to 'Edit', edit_record_path(@record) %> |
-<%= link_to 'Delete', record_path(@record), method: :delete, confirm: 'Are you sure you wish to delete this record? This operation cannot be undone.' %> |
-<%= link_to 'Back', records_path %>
+<%= render 'links' %>

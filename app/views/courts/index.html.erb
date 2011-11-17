@@ -24,29 +24,36 @@
 </div>
 
 <div id="main">
-  <table>
-    <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th>Town</th>
-      <th>Street</th>
-      <th>Instituted at</th>
-    </tr>
+  <p><%= link_to 'New Court', new_court_path %></p>
 
-  <% @courts.each do |court| %>
-    <tr>
-      <td><%= link_to court.code, court %></td>
-      <td><%= court.name %></td>
-      <td><%= court.town %></td>
-      <td><%= court.street %></td>
-      <td><%= court.instituted_on %></td>
-    </tr>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Town</th>
+        <th>Street</th>
+        <th>Instituted at</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @courts.each do |court| %>
+        <tr>
+          <td><%= link_to court.code, court %></td>
+          <td><%= court.name %></td>
+          <td><%= court.town %></td>
+          <td><%= court.street %></td>
+          <td><%= court.instituted_on %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 
   <%= paginate @courts %>
 
   <br />
 
-  <%= link_to 'New Court', new_court_path %>
+  <p><%= link_to 'New Court', new_court_path %></p>
+
 </div>

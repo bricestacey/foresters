@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <%= link_to 'Edit', edit_court_path(@court) %> |
+  <%= link_to 'Back', courts_path %>
+</p>
 
 <p>
   <b>Court Number:</b>
@@ -45,5 +48,7 @@
   <%= @court.ethnicities.map{|e| e.name}.join(', ') %>
 </p>
 
-<%= link_to 'Edit', edit_court_path(@court) %> |
-<%= link_to 'Back', courts_path %>
+<p>
+  <%= link_to 'Edit', edit_court_path(@court) %> |
+  <%= link_to 'Back', courts_path %>
+</p>
