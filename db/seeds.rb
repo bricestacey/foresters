@@ -10,7 +10,7 @@ require 'csv'
 ThinkingSphinx.deltas_suspended = true
 
 CSV.foreach(File.join(Rails.root, 'db', 'courts.csv'), headers: true) do |row|
-  court = Court.create({id: row['id'], 
+  court = Court.create({code: row['id'], 
                 name: row['name'], 
                 town: row['town'], 
                 street: row['street'],
@@ -51,5 +51,6 @@ CSV.foreach(File.join(Rails.root, 'db', 'records.csv'), headers: true) do |row|
   })
 
   record.court = Court.find_by_code(row['Court # '])
+  record.save
   raise if record.court.nil?
 end
