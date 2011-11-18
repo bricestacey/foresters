@@ -24,8 +24,6 @@ CSV.foreach(File.join(Rails.root, 'db', 'courts.csv'), headers: true) do |row|
 end
 
 CSV.foreach(File.join(Rails.root, 'db', 'records.csv'), headers: true) do |row|
-puts row.inspect
-exit
   puts row['Death Claim Number']
   record = Record.create!({
     claim_id: row['Death Claim Number'],
